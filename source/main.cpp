@@ -33,12 +33,9 @@ int main(int argc, char* argv[])
 {
 
 	//\ Lets initialise the AIE Framework and give the window it creates an appropriate title
-	Initialise(iScreenWidth, iScreenHeight, false, "Space Invaders");
+	Initialise(iScreenWidth, iScreenHeight, false, "One of Piece");
 	SetBackgroundColour(SColour(0x00, 0x00, 0x00, 0xFF));
 	AddFont("./fonts/invaders.fnt");
-	//\Now lets create the sprite for our players cannon. That's right in space invaders we control a cannon
-	//\So lets create that with an appropriate variable name and move it to a suitable location (say the middle of our screen)
-	//unsigned int iPlayerCannon = CreateSprite("./images/cannon.png", 64, 32, true);
 
 	g_AssetManager.Load("Player", "./images/invaders/luffyPlayer.png", 40, 64);
 	g_AssetManager.Load("Bullet", "./images/invaders/chopperBullet.png", 24, 36);
@@ -51,16 +48,15 @@ int main(int argc, char* argv[])
 	Entity::init();
 	GameState ecurrentState = gs_MENU;
 
-	ScoreBuffer::load();
+	ScoreDB::Open();
 	ScoreData myScore = { 0, "Your Timer: " };
-
 	do
 	{
 		ClearScreen();
 		float fDeltaT = GetDeltaTime();
 
 		SetFont("./fonts/invaders.fnt");
-		playgame(fDeltaT);
+		Playgame(fDeltaT);
 		
 		std::string timeFrame = "DeltaTime: ";
 		timeFrame.append(std::to_string(fDeltaT));
@@ -68,8 +64,7 @@ int main(int argc, char* argv[])
 
 	} while (FrameworkUpdate() == false && running);
 
-
-	ScoreBuffer::save();
+	ScoreDB::Close();
 	g_AssetManager.FreeAll();
 	Shutdown();
 

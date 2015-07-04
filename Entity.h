@@ -2,6 +2,7 @@
 #include"AIE.h"
 #include <vector>
 #include <cmath>
+#include <cstring>
 #include "AssetManager.h"
 #include "ScoreBuffer.h"
 
@@ -109,6 +110,8 @@ public:
 		DrawLine(0, 40, iScreenWidth, 40, SColour(0xFF, 0xFF, 0x00, 0xFF));
 		DrawScore(100, iScreenHeight - 30);
 	}
+
+	
 	static void Updateall(float dt) // Update everything
 	{
 		m_time += dt; // the time add by DeltaT (score base by time)
@@ -126,9 +129,9 @@ public:
 			if (m_Enemies[i] && m_Enemies[i]->IsActive()) // check to see if enemies exist and enemies exist is active
 			{
 				m_Enemies[i]->Update(dt); //  Update them
-				if (m_Enemies[i]->m_x < m_Enemies[i]->xmin || m_Enemies[i]->m_x > m_Enemies[i]->m_w) // 0 and 800 are screen dimensions ,change accordingly
+				if (m_Enemies[i]->m_x < m_Enemies[i]->xmin && m_Enemies[i]->speed < 0 || m_Enemies[i]->m_x > m_Enemies[i]->m_w && m_Enemies[i]->speed > 0) // 0 and 800 are screen dimensions ,change accordingly
 				{ // this is to check when they hit the wall 		
-					advance = true;  // if they do advane equal true
+  					advance = true;  // if they do advane equal true
 				}
 			}
 
@@ -137,7 +140,7 @@ public:
 				if (m_Enemies[i] && m_Enemies[i]->IsActive()) // if the enemes exist and its exist is active
 				{
 					m_Enemies[i]->speed *= -1; // enemies move to the opposite direction
-					m_Enemies[i]->m_y -= 30; //	i'm not sure on this.				
+					m_Enemies[i]->m_y -= 30;	
 				}
 		// Update collide
 		for (int i = 0; i < 10; ++i) // loop through all bullets
@@ -166,7 +169,6 @@ public:
 	{
 		for (int i = 0; i < 49; ++i)
 			m_Enemies[i] = nullptr;
-
 	}
 };
 Entity *Entity::m_bullets[10];
