@@ -33,9 +33,15 @@ public:
 				 case 257: result = true; break;
 
 
+<<<<<<< HEAD
 				 default: if (i> 31 && i < 127 && len < 6)
 					 
 					 input[len++] = !IsKeyDown(340) && !IsKeyDown(344) ? tolower(i) : i; //properly utilizes shift					 
+=======
+				 default: if (i> 31 && i < 127 && len < 63)
+					 
+					 input[len++] = !IsKeyDown(340) && !IsKeyDown(344) ? tolower(i) : i;			 					 
+>>>>>>> origin/master
 					 break;
 				 }
 			}
@@ -55,7 +61,11 @@ public:
 		}
 		catch (...)
 		{
+<<<<<<< HEAD
 			DrawString("Your not allow to put that name", 672 / 3.1, 780 / 1.5 - 4 * 40, SColour(255, 201, 14, 150));
+=======
+			DrawString("Ah, TRANNNNN!", 672 / 3.1, 780 / 1.5 - 4 * 40, SColour(255, 201, 14, 150));
+>>>>>>> origin/master
 		}
 		DrawString(input, x, y);
 	}
