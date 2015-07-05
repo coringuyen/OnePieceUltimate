@@ -2,6 +2,7 @@
 #include <fstream>
 #include "Aie.h"
 #include <cstring>
+#include <iostream>
 
 
 int ScoreBuffer::m_nScores = 0;				// Number of scores
@@ -21,13 +22,25 @@ void ScoreBuffer::load() // this is to open file and load the scores in
 	fin.close();
 }
 void ScoreBuffer::draw(int x, int y) // this is to draw the score on the screen
-{
+{                                
+	int Scorenum;
 	for (int i = 0; i < m_nScores && i < 10; ++i)
 	{
-		char c_score[8];	
-		itoa((int)m_scores[i].score, c_score, 10);
+		Scorenum = i + 1;
+		char c_score[8];
+		char cnum[8];
+		char output[16];
 		
+		itoa(m_scores[i].score, c_score, 10);
+		itoa(Scorenum, cnum, 10);
+		cnum[1] = ':';
+		cnum[2] = 0;
+
+		strcpy_s(output, 16, m_scores[i].m_name);
+		strcat_s(output, cnum);
+		//DrawString(m_scores[i].m_name, x, y - i * 40);
 		DrawString(c_score, x + 200, y - i * 40);
+		DrawString(output, x, y - i * 40);
 	}
 }
 void ScoreBuffer::save() // save score after finish the game
