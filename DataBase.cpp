@@ -6,26 +6,18 @@
 sqlite3 *ScoreDB::m_db;
 const char * ScoreDB::file_db = "HighScore.db";
 
-<<<<<<< HEAD
 ScoreDB &ScoreDB::getInstance() // singleton
-=======
-ScoreDB &ScoreDB::getInstance()
->>>>>>> origin/master
 {
 	static ScoreDB instance;
 	return instance;
 }
-<<<<<<< HEAD
-static int PrintScores(void* a_count, int numArgs, char **data, char **columnName) // function to print the score on the screen
-=======
+
 static int PrintScores(void* a_count, int numArgs, char **data, char **columnName)
->>>>>>> origin/master
 {
 	int &count = *(int*)a_count;
 	
 	for (int i = 0; i < numArgs; i += 2) // 2 values per score! Name and Score
 	{
-<<<<<<< HEAD
 		DrawString(data[i], 215, 780 - 160 - 80 * count); // name
 		DrawString(data[i + 1], 440, 780 - 160 - 80 * count); //  score
 	}
@@ -60,7 +52,7 @@ struct Position { int x, y; }; // keep tract of the position where to print
 static int PrintHighScore(void* a_pos, int numArgs, char **data, char **columnName)
 {
 		Position &p = *(Position*)a_pos;
-		//DrawString(data[0], p.x, p.y); // draw out the top score on the screen 
+		DrawString(data[0], p.x, p.y); // draw out the top score on the screen 
 		return 0;	
 }
 
@@ -73,32 +65,4 @@ void ScoreDB::HighScore(int x, int y) // function to get highscore
 	//char c_score[8]; // create a char so we can copy it in
 	//itoa(m_scores[0].score, c_score, 10); // this is to copy the first score after sort onto the char we create
 	//DrawString(c_score, x, y); // this is to draw it on the screen with position
-=======
-		DrawString(data[i], 215, 780 - 160 - 80 * count);
-		DrawString(data[i + 1], 440, 780 - 160 - 80 * count);
-	}
-
-	count++;
-	return 0;
-}
-void ScoreDB::Open()
-{
-	sqlite3_open(file_db, &m_db);
-	sqlite3_exec(m_db, "CREATE TABLE IF NOT EXISTS scores(name TEXT, score INT);", 0, 0, 0);
-}
-void ScoreDB::AddScore(int a_score, const char* a_name)
-{
-	std::stringstream ss;
-	ss << "INSERT INTO scores(name, score) VALUES (" << "'" << a_name << "', " << a_score << ");";
-	sqlite3_exec(m_db, ss.str().c_str(), 0, 0, 0);
-}
-void ScoreDB::DrawScores()
-{
-	int count = 0;
-	sqlite3_exec(m_db, "SELECT * from scores order by SCORE desc;", PrintScores, &count, 0);
-}
-void ScoreDB::Close()
-{
-	sqlite3_close(m_db);
->>>>>>> origin/master
 }

@@ -49,14 +49,11 @@ int main(int argc, char* argv[])
 	GameState ecurrentState = gs_MENU;
 	ScoreDB &ref = ScoreDB::getInstance();
 
-<<<<<<< HEAD
+
 	ref.Open();
 	//ScoreData myScore = { 0, "Your Timer: " };
-	
-=======
-	ScoreDB::Open();
-	ScoreData myScore = { 0, "Your Timer: " };
->>>>>>> origin/master
+
+
 	do
 	{
 		ClearScreen();
@@ -71,11 +68,7 @@ int main(int argc, char* argv[])
 
 	} while (FrameworkUpdate() == false && running);
 
-<<<<<<< HEAD
 	ref.Close();
-=======
-	ScoreDB::Close();
->>>>>>> origin/master
 	g_AssetManager.FreeAll();
 	Shutdown();
 

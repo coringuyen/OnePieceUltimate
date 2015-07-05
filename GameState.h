@@ -3,28 +3,20 @@
 #include <stdlib.h>
 #include <cstring>
 #include "DataBase.h"
-<<<<<<< HEAD
 #include "textbox.h"
-=======
->>>>>>> origin/master
+
 
 enum GameState {gs_MENU, gs_PLAY, gs_VICTORY, gs_OVER, gs_SCORE, gs_PAUSE, gs_EXIT, gs_NAME, gs_INST};
 GameState ecurrentState;
 bool running = true;
 char name[6];
-<<<<<<< HEAD
 Textbox txt(200, 400);
 
-void Playgame(float dt)
-{
-=======
 
 void Playgame(float dt)
 {
 	//ScoreData temp;
 	//temp.score = Entity::m_time;
-
->>>>>>> origin/master
 	switch (ecurrentState) // is this mean the ecurrentState will be switching?
 	{
 	case gs_MENU:
@@ -46,12 +38,8 @@ void Playgame(float dt)
 		DrawString("Score (Press H)", iScreenWidth * 0.35f, iScreenHeight * 0.1f);
 		if (IsKeyDown('H')) // if H button is down go to Score case
 			ecurrentState = gs_SCORE;
-<<<<<<< HEAD
 
 		DrawString("Exit (Press E)", iScreenWidth * 0.37f, iScreenHeight * 0.06f);
-=======
-		DrawString("Exit (Press E)", iScreenWidth * 0.37f, iScreenHeight * 0.07f);
->>>>>>> origin/master
 		if (IsKeyDown('E')) // if E button is down Exit out the game
 			ecurrentState = gs_EXIT;
 		break;
@@ -72,19 +60,17 @@ void Playgame(float dt)
 		}
 		else // else the player kill all the enemies "Victory" which mean they won go to case Victory
 		{
-<<<<<<< HEAD
+
 			//ecurrentState = gs_VICTORY;
 			ecurrentState = gs_NAME;
 			ScoreDB::AddScore(Entity::m_time, "Player");
 		}
 		*/
-=======
 			//std::cin.getline(name, 6);
+		{
 			ecurrentState = gs_VICTORY;
 			ScoreDB::AddScore(Entity::m_time, "Player");
 		}
-
->>>>>>> origin/master
 		if (IsKeyDown('P')) // if P button is down the game pause go to Pause case
 			ecurrentState = gs_PAUSE;
 		break;
